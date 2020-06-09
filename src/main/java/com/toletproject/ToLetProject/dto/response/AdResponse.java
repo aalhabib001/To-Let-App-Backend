@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 @Data
 
-public class OwnerAdResponse {
+public class AdResponse {
     String adId;
 
     String ownerPhone;

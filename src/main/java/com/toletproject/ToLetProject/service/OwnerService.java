@@ -1,8 +1,8 @@
 package com.toletproject.ToLetProject.service;
 
 import com.toletproject.ToLetProject.dto.request.PostAdvertiseRequest;
-import com.toletproject.ToLetProject.dto.response.OwnerAdListResponse;
-import com.toletproject.ToLetProject.dto.response.OwnerAdResponse;
+import com.toletproject.ToLetProject.dto.response.AdListResponse;
+import com.toletproject.ToLetProject.dto.response.AdResponse;
 import com.toletproject.ToLetProject.jwt.services.SignUpAndSignInService;
 import com.toletproject.ToLetProject.model.AdvertiseModel;
 import com.toletproject.ToLetProject.repository.AdRepository;
@@ -50,15 +50,21 @@ public class OwnerService {
     }
 
 
-    public OwnerAdListResponse allAds() {
+    public AdListResponse allAds() {
         List<AdvertiseModel> advertiseModelList = adRepository.findAllByOwnerPhone(signUpAndSignInService.getLoggedAuthUser().getPhoneNo());
 
-        OwnerAdListResponse ownerAdListResponse = new OwnerAdListResponse();
+        AdListResponse adListResponse = new AdListResponse();
 
-        List<OwnerAdResponse> ownerAdResponses = new ArrayList<>();
+        adListResponse.setAdRespons(setResponseFromAll(advertiseModelList));
+
+        return adListResponse;
+    }
+
+    List<AdResponse> setResponseFromAll(List<AdvertiseModel> advertiseModelList) {
+        List<AdResponse> adRespons = new ArrayList<>();
 
         for(AdvertiseModel advertiseModel:advertiseModelList){
-            OwnerAdResponse ownerAdResponse = OwnerAdResponse.builder()
+            AdResponse adResponse = AdResponse.builder()
                     .adId(advertiseModel.getAdId())
                     .ownerPhone(advertiseModel.getOwnerPhone())
                     .areaName(advertiseModel.getAreaName())
@@ -79,10 +85,8 @@ public class OwnerService {
                     .photoLinks(advertiseModel.getPhotoLinks())
                     .build();
 
-            ownerAdResponses.add(ownerAdResponse);
+            adRespons.add(adResponse);
         }
-        ownerAdListResponse.setOwnerAdResponses(ownerAdResponses);
-
-        return ownerAdListResponse;
+        return adRespons;
     }
 }

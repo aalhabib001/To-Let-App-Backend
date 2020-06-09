@@ -10,6 +10,6 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Builder
-public class OwnerAdListResponse {
-    List<OwnerAdResponse> ownerAdResponses;
+public class AdListResponse {
+    List<AdResponse> adRespons;
 }

@@ -1,7 +1,7 @@
 package com.toletproject.ToLetProject.controller;
 
 import com.toletproject.ToLetProject.dto.request.PostAdvertiseRequest;
-import com.toletproject.ToLetProject.dto.response.OwnerAdListResponse;
+import com.toletproject.ToLetProject.dto.response.AdListResponse;
 import com.toletproject.ToLetProject.service.OwnerService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +21,7 @@ public class OwnerController {
     }
 
     @GetMapping("/allAds")
-    public OwnerAdListResponse allAds(){
+    public AdListResponse allAds(){
         return ownerService.allAds();
     }
 }

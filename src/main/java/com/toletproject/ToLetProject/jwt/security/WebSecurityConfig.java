@@ -80,6 +80,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/swagger-ui.html").permitAll()
                 .antMatchers("/faculty/**").access("hasAuthority('FACULTY')")
                 .antMatchers("/owner/**").access("hasAuthority('OWNER')")
+                .antMatchers("/user/**").access("hasAuthority('USER')")
                 .antMatchers("/erp/**").access("hasAuthority('ADMIN')")
                 .antMatchers("/erp/**").access("hasAuthority('SUPER_ADMIN')")
                 .antMatchers("/student/**").access("hasAuthority('STUDENT')")
