@@ -11,8 +11,6 @@ import javax.persistence.Id;
 @AllArgsConstructor
 public class PostAdvertiseRequest {
 
-    String ownerPhone;
-
     String areaName;
 
     String adTitle;
@@ -40,8 +38,6 @@ public class PostAdvertiseRequest {
     int rentCost;
 
     int serviceCharge;
-
-    String ownerName;
 
     String photoLinks;
 }
