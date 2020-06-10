@@ -52,4 +52,8 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
+    @Size(min = 6, max = 6)
+    int generatedOTP;
+
+    boolean passwordReset;
 }
