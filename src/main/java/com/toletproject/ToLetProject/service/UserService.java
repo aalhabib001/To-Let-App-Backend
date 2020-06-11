@@ -48,9 +48,10 @@ public class UserService {
 
             for (PhotoLink photoLink : advertiseModel.getPhotoLinksCollection()) {
                 PhotoLinkDTO photoLinkDTO = new PhotoLinkDTO();
-                photoLink.setPhotoLink(photoLink.getPhotoLink());
+                photoLinkDTO.setPhotoLink(photoLink.getPhotoLink());
                 photoLinkDTOList.add(photoLinkDTO);
             }
+
 
             AdResponse adResponse = AdResponse.builder()
                     .adId(advertiseModel.getAdId())
