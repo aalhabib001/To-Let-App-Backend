@@ -31,7 +31,6 @@ public class OOPMethods {
                     .rentCost(advertiseModel.getRentCost())
                     .serviceCharge(advertiseModel.getServiceCharge())
                     .ownerName(advertiseModel.getOwnerName())
-                    .photoLinks(advertiseModel.getPhotoLinks())
                     .build();
 
             adRespons.add(adResponse);

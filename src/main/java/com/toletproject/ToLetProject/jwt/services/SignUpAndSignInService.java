@@ -4,7 +4,6 @@ import com.toletproject.ToLetProject.jwt.dto.request.LoginForm;
 import com.toletproject.ToLetProject.jwt.dto.request.SignUpForm;
 import com.toletproject.ToLetProject.jwt.dto.response.IdentityResponse;
 import com.toletproject.ToLetProject.jwt.dto.response.JwtResponse;
-import com.toletproject.ToLetProject.jwt.dto.response.LoggedUserDetailsResponse;
 import com.toletproject.ToLetProject.jwt.dto.response.TestResponse;
 import com.toletproject.ToLetProject.jwt.model.Role;
 import com.toletproject.ToLetProject.jwt.model.RoleName;
@@ -17,14 +16,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.validation.ValidationException;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
 
 @AllArgsConstructor
 @Service
@@ -69,10 +70,18 @@ public class SignUpAndSignInService {
 
 
     public JwtResponse signIn(LoginForm loginRequest) {
+        Optional<User> userOptional = userRepository.findByEmail(loginRequest.getEmail());
+
+        String userName;
+        if (userOptional.isPresent()) {
+            userName = userOptional.get().getUsername();
+        } else {
+            userName = "";
+        }
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        loginRequest.getUsername(),
+                        userName,
                         loginRequest.getPassword()
                 )
         );

@@ -2,7 +2,9 @@ package com.toletproject.ToLetProject.service;
 
 import com.toletproject.ToLetProject.dto.response.AdListResponse;
 import com.toletproject.ToLetProject.dto.response.AdResponse;
+import com.toletproject.ToLetProject.dto.response.PhotoLinkDTO;
 import com.toletproject.ToLetProject.model.AdvertiseModel;
+import com.toletproject.ToLetProject.model.PhotoLink;
 import com.toletproject.ToLetProject.repository.AdRepository;
 import com.toletproject.ToLetProject.repository.UserAdListRepository;
 import lombok.AllArgsConstructor;
@@ -38,9 +40,18 @@ public class UserService {
     }
 
     List<AdResponse> setResponseFromAll(Page<AdvertiseModel> advertiseModelList) {
+
         List<AdResponse> adRespons = new ArrayList<>();
 
-        for(AdvertiseModel advertiseModel:advertiseModelList){
+        for(AdvertiseModel advertiseModel:advertiseModelList) {
+            List<PhotoLinkDTO> photoLinkDTOList = new ArrayList<>();
+
+            for (PhotoLink photoLink : advertiseModel.getPhotoLinksCollection()) {
+                PhotoLinkDTO photoLinkDTO = new PhotoLinkDTO();
+                photoLink.setPhotoLink(photoLink.getPhotoLink());
+                photoLinkDTOList.add(photoLinkDTO);
+            }
+
             AdResponse adResponse = AdResponse.builder()
                     .adId(advertiseModel.getAdId())
                     .ownerPhone(advertiseModel.getOwnerPhone())
@@ -59,7 +70,7 @@ public class UserService {
                     .rentCost(advertiseModel.getRentCost())
                     .serviceCharge(advertiseModel.getServiceCharge())
                     .ownerName(advertiseModel.getOwnerName())
-                    .photoLinks(advertiseModel.getPhotoLinks())
+                    .photoLinkDTOS(photoLinkDTOList)
                     .build();
 
             adRespons.add(adResponse);

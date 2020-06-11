@@ -3,6 +3,8 @@ package com.toletproject.ToLetProject.dto.response;
 
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -45,5 +47,5 @@ public class AdResponse {
 
     String ownerName;
 
-    String photoLinks;
+    List<PhotoLinkDTO> photoLinkDTOS;
 }

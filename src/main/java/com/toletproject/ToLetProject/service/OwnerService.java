@@ -1,19 +1,25 @@
 package com.toletproject.ToLetProject.service;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.toletproject.ToLetProject.dto.request.PostAdvertiseRequest;
 import com.toletproject.ToLetProject.dto.response.AdListResponse;
 import com.toletproject.ToLetProject.dto.response.AdResponse;
+import com.toletproject.ToLetProject.dto.response.PhotoLinkDTO;
 import com.toletproject.ToLetProject.jwt.services.SignUpAndSignInService;
 import com.toletproject.ToLetProject.model.AdvertiseModel;
+import com.toletproject.ToLetProject.model.PhotoLink;
 import com.toletproject.ToLetProject.repository.AdRepository;
 import lombok.AllArgsConstructor;
+import org.cloudinary.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.io.File;
+import java.nio.file.Files;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
@@ -63,7 +69,15 @@ public class OwnerService {
     List<AdResponse> setResponseFromAll(List<AdvertiseModel> advertiseModelList) {
         List<AdResponse> adRespons = new ArrayList<>();
 
-        for(AdvertiseModel advertiseModel:advertiseModelList){
+        for(AdvertiseModel advertiseModel:advertiseModelList) {
+            List<PhotoLinkDTO> photoLinkDTOList = new ArrayList<>();
+
+            for (PhotoLink photoLink : advertiseModel.getPhotoLinksCollection()) {
+                PhotoLinkDTO photoLinkDTO = new PhotoLinkDTO();
+                photoLinkDTO.setPhotoLink(photoLink.getPhotoLink());
+                photoLinkDTOList.add(photoLinkDTO);
+            }
+
             AdResponse adResponse = AdResponse.builder()
                     .adId(advertiseModel.getAdId())
                     .ownerPhone(advertiseModel.getOwnerPhone())
@@ -82,11 +96,48 @@ public class OwnerService {
                     .rentCost(advertiseModel.getRentCost())
                     .serviceCharge(advertiseModel.getServiceCharge())
                     .ownerName(advertiseModel.getOwnerName())
-                    .photoLinks(advertiseModel.getPhotoLinks())
+                    .photoLinkDTOS(photoLinkDTOList)
                     .build();
 
             adRespons.add(adResponse);
         }
         return adRespons;
+    }
+
+    public ResponseEntity<String> uploadImage(MultipartFile[] aFile, String imageUploadRequest) {
+
+        List<PhotoLink> photoLinksList = new LinkedList<>();
+
+        Cloudinary c = new Cloudinary(ObjectUtils.asMap(
+                "cloud_name", "to-let-app",
+                "api_key", "111257839862595",
+                "api_secret", "7H1QY2G1W6FVQQ3envantRuJz4c"));
+
+        try {
+            Optional<AdvertiseModel> advertiseModelOptional = adRepository.findById(imageUploadRequest);
+
+            for (MultipartFile mpFile : aFile) {
+                File f = Files.createTempFile("temp", mpFile.getOriginalFilename()).toFile();
+                mpFile.transferTo(f);
+
+                Map response = c.uploader().upload(f, ObjectUtils.emptyMap());
+                JSONObject json = new JSONObject(response);
+                String url = json.getString("url");
+
+                PhotoLink photoLink = new PhotoLink();
+                photoLink.setPhotoLink(url);
+
+                photoLinksList.add(photoLink);
+            }
+
+            AdvertiseModel advertiseModel = advertiseModelOptional.get();
+
+            advertiseModel.setPhotoLinksCollection(photoLinksList);
+            adRepository.save(advertiseModel);
+
+            return new ResponseEntity<String>("{\"status\":\"OK\"}", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<String>("Wrong", HttpStatus.BAD_REQUEST);
+        }
     }
 }

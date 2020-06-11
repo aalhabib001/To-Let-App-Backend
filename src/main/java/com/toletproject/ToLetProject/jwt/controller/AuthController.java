@@ -47,7 +47,7 @@ public class AuthController {
         return forgetPasswordService.generateOTP(generateOTPRequest);
     }
 
-    @PostMapping("verifyOTP")
+    @PostMapping("/verifyOTP")
     public String verifyOTP(@RequestBody GenerateOTPRequest1 generateOTPRequest) {
         return forgetPasswordService.verifyOTP(generateOTPRequest);
     }
