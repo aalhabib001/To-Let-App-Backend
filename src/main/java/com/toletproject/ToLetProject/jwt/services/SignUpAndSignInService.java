@@ -2,7 +2,6 @@ package com.toletproject.ToLetProject.jwt.services;
 
 import com.toletproject.ToLetProject.jwt.dto.request.LoginForm;
 import com.toletproject.ToLetProject.jwt.dto.request.SignUpForm;
-import com.toletproject.ToLetProject.jwt.dto.response.IdentityResponse;
 import com.toletproject.ToLetProject.jwt.dto.response.JwtResponse;
 import com.toletproject.ToLetProject.jwt.dto.response.TestResponse;
 import com.toletproject.ToLetProject.jwt.model.Role;
@@ -42,7 +41,7 @@ public class SignUpAndSignInService {
     @Autowired
     private RoleRepository roleRepository;
 
-    public IdentityResponse signUp(SignUpForm signUpRequest) {
+    public JwtResponse signUp(SignUpForm signUpRequest) {
 
 
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
@@ -65,7 +64,18 @@ public class SignUpAndSignInService {
         user.setRoles(getRolesOrThrow(signUpRequest.getRole()));
         userRepository.saveAndFlush(user);
 
-        return new IdentityResponse(uuid);
+
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        user.getUsername(),
+                        signUpRequest.getPassword()
+                )
+        );
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String jwt = jwtProvider.generateJwtToken(authentication);
+
+        return new JwtResponse(jwt, signUpRequest.getRole());
     }
 
 
@@ -89,7 +99,8 @@ public class SignUpAndSignInService {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String jwt = jwtProvider.generateJwtToken(authentication);
-        return new JwtResponse(jwt);
+
+        return new JwtResponse(jwt, getRolesToString(userOptional.get().getRoles()));
     }
 
     public TestResponse getLoggedAuthUser() {

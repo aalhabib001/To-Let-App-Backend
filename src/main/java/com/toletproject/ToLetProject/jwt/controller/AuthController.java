@@ -1,7 +1,7 @@
 package com.toletproject.ToLetProject.jwt.controller;
 
 import com.toletproject.ToLetProject.jwt.dto.request.*;
-import com.toletproject.ToLetProject.jwt.dto.response.IdentityResponse;
+import com.toletproject.ToLetProject.jwt.dto.response.JwtResponse;
 import com.toletproject.ToLetProject.jwt.services.ForgetPasswordService;
 import com.toletproject.ToLetProject.jwt.services.SignUpAndSignInService;
 import lombok.AllArgsConstructor;
@@ -33,7 +33,7 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public IdentityResponse registerUser(@RequestBody SignUpForm signUpRequest) {
+    public JwtResponse registerUser(@RequestBody SignUpForm signUpRequest) {
         return signUpAndSignInService.signUp(signUpRequest);
     }
 
