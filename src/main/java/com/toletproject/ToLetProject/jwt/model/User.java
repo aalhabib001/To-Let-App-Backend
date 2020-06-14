@@ -28,10 +28,12 @@ public class User {
     @Size(min = 3, max = 50)
     private String name;
 
+    @Column(unique = true)
     @NotBlank
-    @Size(min = 3, max = 50)
+    @Size(min = 3, max = 100)
     private String username;
 
+    @Column(unique = true)
     @NaturalId
     @NotBlank
     @Size(max = 50)

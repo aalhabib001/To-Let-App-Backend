@@ -1,9 +1,9 @@
 package com.toletproject.ToLetProject.jwt.controller;
 
 import com.toletproject.ToLetProject.jwt.dto.request.*;
-import com.toletproject.ToLetProject.jwt.dto.response.JwtResponse;
 import com.toletproject.ToLetProject.jwt.services.ForgetPasswordService;
 import com.toletproject.ToLetProject.jwt.services.SignUpAndSignInService;
+import javassist.bytecode.DuplicateMemberException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +33,7 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public JwtResponse registerUser(@RequestBody SignUpForm signUpRequest) {
+    public Object registerUser(@RequestBody SignUpForm signUpRequest) throws DuplicateMemberException {
         return signUpAndSignInService.signUp(signUpRequest);
     }
 
@@ -55,6 +55,12 @@ public class AuthController {
     @PostMapping("/forgetPassChange")
     public String forgetPassChange(@RequestBody GenerateOTPRequest2 generateOTPRequest) throws IOException, MessagingException {
         return forgetPasswordService.forgetPassChange(generateOTPRequest);
+    }
+
+
+    @DeleteMapping("/user/delete/")
+    public String deleteUser(@RequestParam String email) {
+        return signUpAndSignInService.deleteUser(email);
     }
 
 //    @GetMapping("/sendMail")

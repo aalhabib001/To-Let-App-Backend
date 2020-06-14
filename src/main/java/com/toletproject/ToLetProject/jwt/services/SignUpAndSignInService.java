@@ -41,23 +41,20 @@ public class SignUpAndSignInService {
     @Autowired
     private RoleRepository roleRepository;
 
-    public JwtResponse signUp(SignUpForm signUpRequest) {
+    public Object signUp(SignUpForm signUpRequest) {
 
-
-        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
-            //TODO
-        }
 
         if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-            //TODO
+            return true;
         }
+
 
         User user = new User();
         UUID id = UUID.randomUUID();
         String uuid = id.toString();
         user.setId(uuid);
         user.setName(signUpRequest.getName());
-        user.setUsername(signUpRequest.getUsername());
+        user.setUsername(signUpRequest.getEmail() + signUpRequest.getPhoneNo());
         user.setEmail(signUpRequest.getEmail());
         user.setPhoneNo(signUpRequest.getPhoneNo());
         user.setPassword(encoder.encode(signUpRequest.getPassword()));
@@ -207,6 +204,18 @@ public class SignUpAndSignInService {
             roles.add(role.getName().toString());
         }
         return roles;
+    }
+
+    public String deleteUser(String email) {
+
+        if (userRepository.findByEmail(email).isPresent()) {
+
+            userRepository.deleteById(userRepository.findByEmail(email).get().getId());
+            return "Deleted";
+        } else {
+            return "Not Found";
+        }
+
     }
 
 //    public LoggedUserDetailsResponse getLoggedUserDetails(Authentication authentication) {
