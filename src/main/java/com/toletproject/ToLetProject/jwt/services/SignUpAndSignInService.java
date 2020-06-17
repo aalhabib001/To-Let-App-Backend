@@ -1,16 +1,19 @@
 package com.toletproject.ToLetProject.jwt.services;
 
+import com.toletproject.ToLetProject.jwt.dto.AreaNameRequestsResponse;
 import com.toletproject.ToLetProject.jwt.dto.request.EditProfile;
 import com.toletproject.ToLetProject.jwt.dto.request.LoginForm;
 import com.toletproject.ToLetProject.jwt.dto.request.SignUpForm;
 import com.toletproject.ToLetProject.jwt.dto.response.JwtResponse;
 import com.toletproject.ToLetProject.jwt.dto.response.TestResponse;
+import com.toletproject.ToLetProject.jwt.model.AreaNames;
 import com.toletproject.ToLetProject.jwt.model.Role;
 import com.toletproject.ToLetProject.jwt.model.RoleName;
 import com.toletproject.ToLetProject.jwt.model.User;
 import com.toletproject.ToLetProject.jwt.repository.RoleRepository;
 import com.toletproject.ToLetProject.jwt.repository.UserRepository;
 import com.toletproject.ToLetProject.jwt.security.jwt.JwtProvider;
+import com.toletproject.ToLetProject.repository.AreaNameRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,10 +25,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.validation.ValidationException;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @AllArgsConstructor
 @Service
@@ -41,6 +41,8 @@ public class SignUpAndSignInService {
     private UserRepository userRepository;
     @Autowired
     private RoleRepository roleRepository;
+
+    private final AreaNameRepository areaNameRepository;
 
     public Object signUp(SignUpForm signUpRequest) {
 
@@ -242,6 +244,26 @@ public class SignUpAndSignInService {
         }
 
 
+    }
+
+    public String addAreaList(AreaNameRequestsResponse areaNameRequestsResponse) {
+        for (String names : areaNameRequestsResponse.getAreaNames()) {
+            AreaNames areaNames = new AreaNames(names);
+            areaNameRepository.save(areaNames);
+        }
+        return "Saved";
+    }
+
+    public AreaNameRequestsResponse getAreaList() {
+        List<AreaNames> areaNamesOptional = areaNameRepository.findAll();
+
+        AreaNameRequestsResponse areaNameRequestsResponse = new AreaNameRequestsResponse();
+        List<String> areaNamesList = new ArrayList<>();
+        for (AreaNames areaNames : areaNamesOptional) {
+            areaNamesList.add(areaNames.getAreaName());
+        }
+        areaNameRequestsResponse.setAreaNames(areaNamesList);
+        return areaNameRequestsResponse;
     }
 
 //    public LoggedUserDetailsResponse getLoggedUserDetails(Authentication authentication) {

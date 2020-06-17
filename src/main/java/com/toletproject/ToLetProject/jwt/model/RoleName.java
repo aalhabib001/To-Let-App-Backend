@@ -1,7 +1,7 @@
 package com.toletproject.ToLetProject.jwt.model;
 
 public enum RoleName {
-    ADMIN,
+    SUPER_ADMIN,
     OWNER,
     USER
 }

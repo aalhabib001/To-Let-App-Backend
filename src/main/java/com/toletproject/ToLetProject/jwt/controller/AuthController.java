@@ -1,5 +1,6 @@
 package com.toletproject.ToLetProject.jwt.controller;
 
+import com.toletproject.ToLetProject.jwt.dto.AreaNameRequestsResponse;
 import com.toletproject.ToLetProject.jwt.dto.request.*;
 import com.toletproject.ToLetProject.jwt.services.ForgetPasswordService;
 import com.toletproject.ToLetProject.jwt.services.SignUpAndSignInService;
@@ -67,6 +68,16 @@ public class AuthController {
     public String editUserDetails(@RequestBody EditProfile editProfile) {
         return signUpAndSignInService.editProfile(editProfile);
 
+    }
+
+    @PostMapping("/areas")
+    public String setAreaNames(@RequestBody AreaNameRequestsResponse areaNameRequestsResponse) {
+        return signUpAndSignInService.addAreaList(areaNameRequestsResponse);
+    }
+
+    @GetMapping("/areas")
+    public AreaNameRequestsResponse getAreaNames() {
+        return signUpAndSignInService.getAreaList();
     }
 
 //    @GetMapping("/sendMail")

@@ -1,4 +1,4 @@
-package com.toletproject.ToLetProject.model;
+package com.toletproject.ToLetProject.jwt.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
