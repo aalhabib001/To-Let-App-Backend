@@ -26,12 +26,16 @@ public class UserService {
 
     public AdListResponse getUserAdList(int pageNo, int pageSize) {
 
-        Pageable pageable = PageRequest.of(pageNo,pageSize);
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
         Page<AdvertiseModel> advertiseModels = userAdListRepository.findAll(pageable);
 
 
-
         AdListResponse adListResponse = new AdListResponse();
+        if (!advertiseModels.isEmpty()) {
+            adListResponse.setFound(true);
+        } else {
+            adListResponse.setFound(false);
+        }
 
         adListResponse.setAdRespons(setResponseFromAll(advertiseModels));
 
@@ -79,4 +83,20 @@ public class UserService {
         return adRespons;
     }
 
+    public AdListResponse getAdsByLocation(int pageNo, int pageSize, String location) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        Page<AdvertiseModel> advertiseModels = userAdListRepository.findAllByAreaName(pageable, location);
+
+        AdListResponse adListResponse = new AdListResponse();
+
+        if (!advertiseModels.isEmpty()) {
+            adListResponse.setFound(true);
+        } else {
+            adListResponse.setFound(false);
+        }
+        adListResponse.setAdRespons(setResponseFromAll(advertiseModels));
+        return adListResponse;
+
+
+    }
 }

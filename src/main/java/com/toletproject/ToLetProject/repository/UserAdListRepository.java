@@ -6,10 +6,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import java.util.Optional;
 
 @Repository
-public interface UserAdListRepository extends PagingAndSortingRepository<AdvertiseModel,String> {
+public interface UserAdListRepository extends PagingAndSortingRepository<AdvertiseModel, String> {
 
     Page<AdvertiseModel> findAll(Pageable pageable);
+
+    Page<AdvertiseModel> findAllByAreaName(Pageable pageable, String areaName);
+
+    Optional<AdvertiseModel> findAllByAreaName(String areaName);
+
 }

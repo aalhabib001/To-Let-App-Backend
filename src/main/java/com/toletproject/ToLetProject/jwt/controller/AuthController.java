@@ -63,6 +63,12 @@ public class AuthController {
         return signUpAndSignInService.deleteUser(email);
     }
 
+    @PutMapping("/user/edit")
+    public String editUserDetails(@RequestBody EditProfile editProfile) {
+        return signUpAndSignInService.editProfile(editProfile);
+
+    }
+
 //    @GetMapping("/sendMail")
 //    public String sendMail()throws MessagingException, IOException {
 //        return forgetPasswordService.sendMail();

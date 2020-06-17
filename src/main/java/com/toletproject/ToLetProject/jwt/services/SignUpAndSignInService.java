@@ -1,5 +1,6 @@
 package com.toletproject.ToLetProject.jwt.services;
 
+import com.toletproject.ToLetProject.jwt.dto.request.EditProfile;
 import com.toletproject.ToLetProject.jwt.dto.request.LoginForm;
 import com.toletproject.ToLetProject.jwt.dto.request.SignUpForm;
 import com.toletproject.ToLetProject.jwt.dto.response.JwtResponse;
@@ -145,7 +146,7 @@ public class SignUpAndSignInService {
             loggedInAuthUserId = userRepository.findAuthUsersById(username);
             response.setUsername(userRepository.findByUsername(username).get().getUsername());
             response.setName(userRepository.findByUsername(username).get().getName());
-            return response.getName();
+            return response.getUsername();
 
         } else if (authUser instanceof UserDetails == false) {
             throw new RuntimeException("LoggedIn user does not  account.");
@@ -215,6 +216,31 @@ public class SignUpAndSignInService {
         } else {
             return "Not Found";
         }
+
+    }
+
+    public String editProfile(EditProfile editProfile) {
+        String username = getLoggedAuthUserName();
+
+        if (!username.isEmpty()) {
+            System.out.println(username);
+            Optional<User> userOptional = userRepository.findByUsername(username);
+
+            if (userOptional.isPresent()) {
+                User user = userOptional.get();
+                user.setName(editProfile.getName());
+                user.setPhoneNo(editProfile.getPhoneNo());
+                user.setPassword(encoder.encode(editProfile.getPassword()));
+                userRepository.save(user);
+                return "Saved Successfully";
+            } else {
+                return "User Not Found";
+            }
+
+        } else {
+            return "Unsuccessful";
+        }
+
 
     }
 

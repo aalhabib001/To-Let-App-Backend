@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @AllArgsConstructor
-
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/owner")
 public class OwnerController {
@@ -27,10 +27,8 @@ public class OwnerController {
     }
 
     @PostMapping(value = "/image/{link}")
-    public ResponseEntity<String> post(
-            @RequestParam(value = "upload", required = true) MultipartFile[] aFile,
-            @PathVariable String link
-    ) {
+    public ResponseEntity<String> post(@RequestParam(value = "upload", required = true) MultipartFile[] aFile,
+                                       @PathVariable String link) {
         return ownerService.uploadImage(aFile, link);
     }
 

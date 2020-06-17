@@ -71,6 +71,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.cors().and().csrf().disable().
                 authorizeRequests()
+                .antMatchers("/api/auth/user/edit").access("hasAuthority('USER')")
+                .antMatchers("/api/auth/user/edit").access("hasAuthority('OWNER')")
                 .antMatchers("/api/auth/**").permitAll()
                 .antMatchers("/public/**").permitAll()
                 .antMatchers("/user").permitAll()
@@ -81,9 +83,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/faculty/**").access("hasAuthority('FACULTY')")
                 .antMatchers("/owner/**").access("hasAuthority('OWNER')")
                 .antMatchers("/user/**").access("hasAuthority('USER')")
+                .antMatchers("/user/**").access("hasAuthority('OWNER')")
                 .antMatchers("/erp/**").access("hasAuthority('ADMIN')")
                 .antMatchers("/erp/**").access("hasAuthority('SUPER_ADMIN')")
                 .antMatchers("/student/**").access("hasAuthority('STUDENT')")
+                .antMatchers("/").access("hasAuthority('SUPER_ADMIN')")
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()

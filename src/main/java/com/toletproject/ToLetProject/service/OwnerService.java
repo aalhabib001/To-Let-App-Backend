@@ -61,6 +61,11 @@ public class OwnerService {
 
         AdListResponse adListResponse = new AdListResponse();
 
+        if (!advertiseModelList.isEmpty()) {
+            adListResponse.setFound(true);
+        } else {
+            adListResponse.setFound(false);
+        }
         adListResponse.setAdRespons(setResponseFromAll(advertiseModelList));
 
         return adListResponse;

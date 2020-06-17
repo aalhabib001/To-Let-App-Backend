@@ -11,5 +11,6 @@ import java.util.List;
 @Data
 @Builder
 public class AdListResponse {
+    boolean found;
     List<AdResponse> adRespons;
 }
