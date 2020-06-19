@@ -14,13 +14,20 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 
 public class EditProfile {
-    @NotBlank
-    @Size(min = 11, max = 11)
-    String phoneNo;
+
     @NotBlank
     @Size(min = 3, max = 50)
     private String name;
+
+    @NotBlank
+    @Size(min = 11, max = 11)
+    String phoneNo;
+
     @NotBlank
     @Size(min = 6, max = 40)
-    private String password;
+    private String currentPassword;
+
+    @NotBlank
+    @Size(min = 6, max = 40)
+    private String newPassword;
 }

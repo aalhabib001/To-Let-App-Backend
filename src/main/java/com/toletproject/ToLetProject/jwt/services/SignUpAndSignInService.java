@@ -225,16 +225,26 @@ public class SignUpAndSignInService {
         String username = getLoggedAuthUserName();
 
         if (!username.isEmpty()) {
-            System.out.println(username);
+            //System.out.println(username);
             Optional<User> userOptional = userRepository.findByUsername(username);
 
             if (userOptional.isPresent()) {
-                User user = userOptional.get();
-                user.setName(editProfile.getName());
-                user.setPhoneNo(editProfile.getPhoneNo());
-                user.setPassword(encoder.encode(editProfile.getPassword()));
-                userRepository.save(user);
-                return "Saved Successfully";
+                if (encoder.matches(editProfile.getCurrentPassword(), userOptional.get().getPassword())) {
+                    User user = userOptional.get();
+                    if (!editProfile.getName().isEmpty()) {
+                        user.setName(editProfile.getName());
+                    }
+                    if (!editProfile.getPhoneNo().isEmpty()) {
+                        user.setPhoneNo(editProfile.getPhoneNo());
+                    }
+
+                    user.setPassword(encoder.encode(editProfile.getNewPassword()));
+                    userRepository.save(user);
+                    return "Saved Successfully";
+                } else {
+                    return "Wrong Current Password";
+                }
+
             } else {
                 return "User Not Found";
             }
