@@ -229,22 +229,24 @@ public class SignUpAndSignInService {
             Optional<User> userOptional = userRepository.findByUsername(username);
 
             if (userOptional.isPresent()) {
-                if (encoder.matches(editProfile.getCurrentPassword(), userOptional.get().getPassword())) {
-                    User user = userOptional.get();
-                    if (!editProfile.getName().isEmpty()) {
-                        user.setName(editProfile.getName());
-                    }
-                    if (!editProfile.getPhoneNo().isEmpty()) {
-                        user.setPhoneNo(editProfile.getPhoneNo());
-                    }
+                User user = userOptional.get();
+                if (!editProfile.getName().isEmpty()) {
+                    user.setName(editProfile.getName());
+                }
+                if (!editProfile.getPhoneNo().isEmpty()) {
+                    user.setPhoneNo(editProfile.getPhoneNo());
+                }
+                if (!editProfile.getNewPassword().isEmpty() && !editProfile.getCurrentPassword().isEmpty()) {
+                    if (encoder.matches(editProfile.getCurrentPassword(), userOptional.get().getPassword())) {
 
-                    user.setPassword(encoder.encode(editProfile.getNewPassword()));
-                    userRepository.save(user);
-                    return "Saved Successfully";
-                } else {
-                    return "Wrong Current Password";
+                        user.setPassword(encoder.encode(editProfile.getNewPassword()));
+                    } else {
+                        return "Wrong Current Password";
+                    }
                 }
 
+                userRepository.save(user);
+                return "Saved Successfully";
             } else {
                 return "User Not Found";
             }
