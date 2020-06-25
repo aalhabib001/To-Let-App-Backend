@@ -80,6 +80,11 @@ public class AuthController {
         return signUpAndSignInService.getAreaList();
     }
 
+    @GetMapping("/serverCheck")
+    public String getServerStatus() {
+        return "Server is Running";
+    }
+
 //    @GetMapping("/sendMail")
 //    public String sendMail()throws MessagingException, IOException {
 //        return forgetPasswordService.sendMail();
