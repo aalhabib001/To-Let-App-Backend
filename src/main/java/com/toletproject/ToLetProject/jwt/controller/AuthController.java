@@ -82,7 +82,7 @@ public class AuthController {
 
     @GetMapping("/serverCheck")
     public String getServerStatus() {
-        return "Server is Running";
+        return "The Server is Running";
     }
 
 //    @GetMapping("/sendMail")
