@@ -27,14 +27,14 @@ public class PostAdvertiseRequest {
 
     int floorLevel;
 
-    boolean generator;
+    String generator;
 
-    boolean gas;
+    String gas;
 
-    boolean bachelorAllowed;
+    String bachelorAllowed;
+
+    String lift;
 
     int rentCost;
-
-    int serviceCharge;
 
 }

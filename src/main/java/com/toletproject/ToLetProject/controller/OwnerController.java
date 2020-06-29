@@ -1,6 +1,7 @@
 package com.toletproject.ToLetProject.controller;
 
 import com.toletproject.ToLetProject.dto.request.PostAdvertiseRequest;
+import com.toletproject.ToLetProject.dto.response.AdIdResponse;
 import com.toletproject.ToLetProject.dto.response.AdListResponse;
 import com.toletproject.ToLetProject.service.OwnerService;
 import lombok.AllArgsConstructor;
@@ -17,7 +18,7 @@ public class OwnerController {
     private final OwnerService ownerService;
 
     @PostMapping("/postAdd")
-    public ResponseEntity<String> postAdvertise(@RequestBody PostAdvertiseRequest postAdvertiseRequest) {
+    public ResponseEntity<AdIdResponse> postAdvertise(@RequestBody PostAdvertiseRequest postAdvertiseRequest) {
         return ownerService.postAdvertise(postAdvertiseRequest);
     }
 

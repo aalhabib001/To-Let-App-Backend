@@ -3,6 +3,7 @@ package com.toletproject.ToLetProject.service;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.toletproject.ToLetProject.dto.request.PostAdvertiseRequest;
+import com.toletproject.ToLetProject.dto.response.AdIdResponse;
 import com.toletproject.ToLetProject.dto.response.AdListResponse;
 import com.toletproject.ToLetProject.dto.response.AdResponse;
 import com.toletproject.ToLetProject.dto.response.PhotoLinkDTO;
@@ -27,7 +28,7 @@ public class OwnerService {
     private final AdRepository adRepository;
     private final SignUpAndSignInService signUpAndSignInService;
 
-    public ResponseEntity<String> postAdvertise(PostAdvertiseRequest postAdvertiseRequest) {
+    public ResponseEntity<AdIdResponse> postAdvertise(PostAdvertiseRequest postAdvertiseRequest) {
 
 
         AdvertiseModel advertiseModel = new AdvertiseModel();
@@ -43,16 +44,17 @@ public class OwnerService {
         advertiseModel.setBed(postAdvertiseRequest.getBed());
         advertiseModel.setFloorLevel(postAdvertiseRequest.getFloorLevel());
         advertiseModel.setBath(postAdvertiseRequest.getBath());
-        advertiseModel.setGenerator(postAdvertiseRequest.isGenerator());
-        advertiseModel.setGas(postAdvertiseRequest.isGas());
-        advertiseModel.setBachelorAllowed(postAdvertiseRequest.isBachelorAllowed());
+        advertiseModel.setGenerator(postAdvertiseRequest.getGenerator());
+        advertiseModel.setGas(postAdvertiseRequest.getGas());
+        advertiseModel.setBachelorAllowed(postAdvertiseRequest.getBachelorAllowed());
         advertiseModel.setRentCost(postAdvertiseRequest.getRentCost());
-        advertiseModel.setServiceCharge(postAdvertiseRequest.getServiceCharge());
+        advertiseModel.setLift(postAdvertiseRequest.getLift());
         advertiseModel.setOwnerName(signUpAndSignInService.getLoggedAuthUser().getName());
 
+        AdIdResponse adIdResponse = new AdIdResponse(id.toString());
         adRepository.save(advertiseModel);
 
-        return new ResponseEntity<>("Data Saved Successfully & The Ad id is: "+id.toString(), HttpStatus.CREATED);
+        return new ResponseEntity<>(adIdResponse, HttpStatus.CREATED);
     }
 
 
@@ -95,11 +97,11 @@ public class OwnerService {
                     .bed(advertiseModel.getBed())
                     .floorLevel(advertiseModel.getFloorLevel())
                     .bath(advertiseModel.getBath())
-                    .generator(advertiseModel.isGenerator())
-                    .gas(advertiseModel.isGas())
-                    .bachelorAllowed(advertiseModel.isBachelorAllowed())
+                    .generator(advertiseModel.getGenerator())
+                    .gas(advertiseModel.getGas())
+                    .bachelorAllowed(advertiseModel.getBachelorAllowed())
                     .rentCost(advertiseModel.getRentCost())
-                    .serviceCharge(advertiseModel.getServiceCharge())
+                    .lift(advertiseModel.getLift())
                     .ownerName(advertiseModel.getOwnerName())
                     .photoLinkDTOS(photoLinkDTOList)
                     .build();

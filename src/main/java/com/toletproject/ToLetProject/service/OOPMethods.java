@@ -25,11 +25,11 @@ public class OOPMethods {
                     .bed(advertiseModel.getBed())
                     .floorLevel(advertiseModel.getFloorLevel())
                     .bath(advertiseModel.getBath())
-                    .generator(advertiseModel.isGenerator())
-                    .gas(advertiseModel.isGas())
-                    .bachelorAllowed(advertiseModel.isBachelorAllowed())
+                    .generator(advertiseModel.getGenerator())
+                    .gas(advertiseModel.getGas())
+                    .bachelorAllowed(advertiseModel.getBachelorAllowed())
                     .rentCost(advertiseModel.getRentCost())
-                    .serviceCharge(advertiseModel.getServiceCharge())
+                    .lift(advertiseModel.getLift())
                     .ownerName(advertiseModel.getOwnerName())
                     .build();
 
