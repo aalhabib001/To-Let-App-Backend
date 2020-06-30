@@ -9,14 +9,14 @@ pipeline {
 
          }
       }
-      stage('test') {
-         steps {
+      //stage('test') {
+       //  steps {
 
             // Run Maven on a Unix agent.
-            sh "mvn test"
+       //     sh "mvn test"
 
-         }
-      }
+       //  }
+      //}
       stage('Build') {
          steps {
 
@@ -25,11 +25,19 @@ pipeline {
 
          }
       }
+
+      //stage("Staging") {
+         //       sh "pid=\$(lsof -i:8989 -t); kill -TERM \$pid "
+         //         + "|| kill -KILL \$pid"
+         //       withEnv(['JENKINS_NODE_COOKIE=dontkill']) {
+          //          sh 'nohup ./mvnw spring-boot:run -Dserver.port=8989 &'
+         //       }
+          //  }
       stage('Deploy') {
          steps {
 
-            // Run Maven on a Unix agent.
-            sh "mvn clean package"
+             //Run Maven on a Unix agent.
+            sh "nohup java -jar ./target/ToLetProject-0.0.1-SNAPSHOT.jar &"
 
          }
       }
