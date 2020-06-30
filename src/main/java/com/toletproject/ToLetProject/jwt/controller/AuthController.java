@@ -81,7 +81,7 @@ public class AuthController {
     }
 
     @GetMapping("/serverCheck")
-    public String getServerStatus() {
+    public String getServerStatStatus() {
         return "The Server is Running";
     }
 
