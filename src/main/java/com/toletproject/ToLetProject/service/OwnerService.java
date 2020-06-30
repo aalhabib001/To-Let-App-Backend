@@ -28,13 +28,17 @@ public class OwnerService {
     private final AdRepository adRepository;
     private final SignUpAndSignInService signUpAndSignInService;
 
-    public ResponseEntity<AdIdResponse> postAdvertise(PostAdvertiseRequest postAdvertiseRequest) {
+    public AdIdResponse postAdvertise(PostAdvertiseRequest postAdvertiseRequest) {
 
+
+        System.out.println("1");
 
         AdvertiseModel advertiseModel = new AdvertiseModel();
         UUID id = UUID.randomUUID();
         advertiseModel.setAdId(id.toString());
+        System.out.println("2");
         advertiseModel.setOwnerPhone(signUpAndSignInService.getLoggedAuthUser().getPhoneNo());
+        System.out.println("3");
         advertiseModel.setAreaName(postAdvertiseRequest.getAreaName());
         advertiseModel.setAdTitle(postAdvertiseRequest.getAdTitle());
         advertiseModel.setAreaOfProperty(postAdvertiseRequest.getAreaOfProperty());
@@ -49,12 +53,15 @@ public class OwnerService {
         advertiseModel.setBachelorAllowed(postAdvertiseRequest.getBachelorAllowed());
         advertiseModel.setRentCost(postAdvertiseRequest.getRentCost());
         advertiseModel.setLift(postAdvertiseRequest.getLift());
+        System.out.println("4");
         advertiseModel.setOwnerName(signUpAndSignInService.getLoggedAuthUser().getName());
 
-        AdIdResponse adIdResponse = new AdIdResponse(id.toString());
+        AdIdResponse adIdResponse = new AdIdResponse();
+        adIdResponse.setAdId(id.toString());
         adRepository.save(advertiseModel);
 
-        return new ResponseEntity<>(adIdResponse, HttpStatus.CREATED);
+        System.out.println("5");
+        return adIdResponse;
     }
 
 

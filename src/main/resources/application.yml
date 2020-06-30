@@ -126,8 +126,8 @@ eureka:
 #    url: ${DB_URL:jdbc:postgresql://localhost:5432/toletproject?createDatabaseIfNotExist=true}
 #    username: ${DB_USERNAME:postgres}
 #    password: ${DB_PASSWORD:1221}
-#
-#---
+
+---
 
 spring:
   profiles: mysql

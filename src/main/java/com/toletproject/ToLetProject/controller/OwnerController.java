@@ -18,7 +18,7 @@ public class OwnerController {
     private final OwnerService ownerService;
 
     @PostMapping("/postAdd")
-    public ResponseEntity<AdIdResponse> postAdvertise(@RequestBody PostAdvertiseRequest postAdvertiseRequest) {
+    public AdIdResponse postAdvertise(@RequestBody PostAdvertiseRequest postAdvertiseRequest) {
         return ownerService.postAdvertise(postAdvertiseRequest);
     }
 
