@@ -37,7 +37,13 @@ pipeline {
          steps {
 
              //Run Maven on a Unix agent.
-            sh "nohup java -jar ./target/ToLetProject-0.0.1-SNAPSHOT.jar &"
+            sh """
+
+            export BUILD_ID=dontKillMe
+            nohup java -jar ./target/ToLetProject-0.0.1-SNAPSHOT.jar &
+
+            """
+
 
          }
       }
