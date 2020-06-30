@@ -39,8 +39,7 @@ pipeline {
              //Run Maven on a Unix agent.
             sh """
 
-            export BUILD_ID=dontKillMe
-            nohup java -jar ./target/ToLetProject-0.0.1-SNAPSHOT.jar &
+            JENKINS_NODE_COOKIE=dontKillMe nohup java -jar ./target/ToLetProject-0.0.1-SNAPSHOT.jar &
 
             """
 
