@@ -80,7 +80,7 @@ public class AuthController {
         return signUpAndSignInService.getAreaList();
     }
 
-    @GetMapping("/serverStatCheck")
+    @GetMapping("/serverCheck")
     public String getServerStatus() {
         return "The Server is Running";
     }
