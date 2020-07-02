@@ -20,7 +20,7 @@ public class UserController {
 //    }
 
     @GetMapping("/ads")
-    public AdListResponse getAdsByLocation(@RequestParam int pageNo, @RequestParam int pageSize, @RequestParam(value = "location", required = false, defaultValue = "") String location) {
+    public AdListResponse getAdsByLocation(@RequestParam int pageNo, @RequestParam int pageSize, @RequestParam(value = "area", required = false, defaultValue = "") String location) {
 
         if (!location.isEmpty()) {
             return userService.getAdsByLocation(pageNo, pageSize, location);
