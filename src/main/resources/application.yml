@@ -129,6 +129,7 @@ eureka:
 
 ---
 
+
 spring:
   profiles: mysql
   datasource:
