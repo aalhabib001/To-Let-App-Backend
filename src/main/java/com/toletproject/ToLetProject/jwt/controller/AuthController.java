@@ -85,6 +85,7 @@ public class AuthController {
         return "The Server is Running";
     }
 
+
 //    @GetMapping("/sendMail")
 //    public String sendMail()throws MessagingException, IOException {
 //        return forgetPasswordService.sendMail();

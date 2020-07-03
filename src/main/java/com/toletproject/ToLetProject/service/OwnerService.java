@@ -154,4 +154,15 @@ public class OwnerService {
             return new ResponseEntity<String>("Wrong", HttpStatus.BAD_REQUEST);
         }
     }
+
+    public ResponseEntity<String> deleteAdById(String adId) {
+        adRepository.deleteById(adId);
+
+        return new ResponseEntity<>("Deleted", org.apache.http.HttpStatus.SC_OK);
+    }
+
+    public ResponseEntity<String> deleteAll() {
+        adRepository.deleteAll();
+        return new ResponseEntity<>("Deleted All", org.apache.http.HttpStatus.SC_OK);
+    }
 }

@@ -33,4 +33,15 @@ public class OwnerController {
         return ownerService.uploadImage(aFile, link);
     }
 
+    @DeleteMapping("/delete/{adId}")
+    public ResponseEntity<String> deleteAdById(@PathVariable String adId) {
+        return ownerService.deleteAdById(adId);
+    }
+
+    @DeleteMapping("/deleteAll")
+    public ResponseEntity<String> deleteAdById() {
+        return ownerService.deleteAll();
+    }
+
+
 }
