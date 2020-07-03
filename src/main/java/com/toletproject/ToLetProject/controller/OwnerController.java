@@ -34,12 +34,12 @@ public class OwnerController {
     }
 
     @DeleteMapping("/delete/{adId}")
-    public ResponseEntity<String> deleteAdById(@PathVariable String adId) {
+    public String deleteAdById(@PathVariable String adId) {
         return ownerService.deleteAdById(adId);
     }
 
     @DeleteMapping("/deleteAll")
-    public ResponseEntity<String> deleteAdById() {
+    public String deleteAdById() {
         return ownerService.deleteAll();
     }
 

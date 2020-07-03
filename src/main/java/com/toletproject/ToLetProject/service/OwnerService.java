@@ -155,14 +155,14 @@ public class OwnerService {
         }
     }
 
-    public ResponseEntity<String> deleteAdById(String adId) {
+    public String deleteAdById(String adId) {
         adRepository.deleteById(adId);
 
-        return new ResponseEntity<>("Deleted", org.apache.http.HttpStatus.SC_OK);
+        return "Deleted";
     }
 
-    public ResponseEntity<String> deleteAll() {
+    public String deleteAll() {
         adRepository.deleteAll();
-        return new ResponseEntity<>("Deleted All", org.apache.http.HttpStatus.SC_OK);
+        return "Deleted All";
     }
 }
