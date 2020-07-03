@@ -27,10 +27,10 @@ public class OwnerController {
         return ownerService.allAds();
     }
 
-    @PostMapping(value = "/image/{link}")
-    public ResponseEntity<String> post(@RequestParam(value = "upload", required = true) MultipartFile[] aFile,
-                                       @PathVariable String link) {
-        return ownerService.uploadImage(aFile, link);
+    @PostMapping(value = "/image/{adId}")
+    public ResponseEntity<String> post(@RequestParam(value = "image", required = true) MultipartFile[] aFile,
+                                       @PathVariable String adId) {
+        return ownerService.uploadImage(aFile, adId);
     }
 
     @DeleteMapping("/delete/{adId}")

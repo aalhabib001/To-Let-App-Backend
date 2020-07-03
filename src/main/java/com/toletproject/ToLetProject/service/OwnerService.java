@@ -121,7 +121,6 @@ public class OwnerService {
     public ResponseEntity<String> uploadImage(MultipartFile[] aFile, String imageUploadRequest) {
 
         List<PhotoLink> photoLinksList = new LinkedList<>();
-
         Cloudinary c = new Cloudinary(ObjectUtils.asMap(
                 "cloud_name", "to-let-app",
                 "api_key", "111257839862595",
@@ -129,11 +128,9 @@ public class OwnerService {
 
         try {
             Optional<AdvertiseModel> advertiseModelOptional = adRepository.findById(imageUploadRequest);
-
             for (MultipartFile mpFile : aFile) {
                 File f = Files.createTempFile("temp", mpFile.getOriginalFilename()).toFile();
                 mpFile.transferTo(f);
-
                 Map response = c.uploader().upload(f, ObjectUtils.emptyMap());
                 JSONObject json = new JSONObject(response);
                 String url = json.getString("url");
@@ -148,6 +145,7 @@ public class OwnerService {
 
             advertiseModel.setPhotoLinksCollection(photoLinksList);
             adRepository.save(advertiseModel);
+
 
             return new ResponseEntity<String>("{\"status\":\"OK\"}", HttpStatus.OK);
         } catch (Exception e) {
