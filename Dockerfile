@@ -5,7 +5,8 @@
 FROM adoptopenjdk/openjdk11:alpine-jre
 FROM maven
 
-RUN mvn -f /home/app/pom.xml clean package
+#RUN mvn -f /usr/src/app/pom.xml clean package
+RUN mvn -f /usr/src/app/pom.xml clean package
 
 # Refer to Maven build -> finalName
 ARG JAR_FILE=target/*.jar
