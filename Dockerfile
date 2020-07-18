@@ -21,7 +21,7 @@ RUN mvn dependency:go-offline -B
 COPY ./src ./src
 
 # TODO: jollof-* should be replaced with the proper prefix
-RUN mvn package && cp target/jollof-*.jar app.jar
+RUN mvn package && cp target/*.jar app.jar
 
 # Rely on Docker's multi-stage build to get a smaller image based on JRE
 FROM openjdk:8-jre-alpine
