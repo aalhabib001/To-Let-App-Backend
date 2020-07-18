@@ -30,6 +30,5 @@ WORKDIR /app
 COPY --from=maven /app/app.jar ./app.jar
 
 # VOLUME /tmp  # optional
-EXPOSE 8080    # also optional
 
 ENTRYPOINT ["java","-jar","/app.jar"]
