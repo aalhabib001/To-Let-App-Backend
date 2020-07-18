@@ -133,7 +133,7 @@ eureka:
 spring:
   profiles: mysql
   datasource:
-    url: ${DB_URL:postgres/to-let-app}
+    url: ${DB_URL:jdbc:postgresql://52.148.85.79:5432/to-let-app}
     username: ${DB_USERNAME:root}
     password: ${DB_PASSWORD:1221}
 
