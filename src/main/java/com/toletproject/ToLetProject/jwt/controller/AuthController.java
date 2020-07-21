@@ -91,9 +91,9 @@ public class AuthController {
 //        return forgetPasswordService.sendMail();
 //    }
 
-//    @GetMapping("/lUser")
-//    public LoggedUserDetailsResponse getDashboard(Authentication authentication) {
-//
-//        return signUpAndSignInService.getLoggedUserDetails(authentication);
-//    }
+    @GetMapping("/lUser")
+    public String getDashboard(Authentication authentication) {
+
+        return "hello";
+    }
 }
