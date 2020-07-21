@@ -92,7 +92,7 @@ public class AuthController {
 //    }
 
     @GetMapping("/lUser")
-    public LoggedUserDetailsResponse getDashboard(Authentication authentication) {
+    public String getSomething() {
         return NULL;
     }
 }
