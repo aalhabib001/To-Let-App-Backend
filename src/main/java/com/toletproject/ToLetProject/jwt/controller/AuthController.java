@@ -93,6 +93,6 @@ public class AuthController {
 
     @GetMapping("/lUser")
     public String getSomething() {
-        return NULL;
+        return "NULL";
     }
 }
