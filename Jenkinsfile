@@ -38,9 +38,10 @@ pipeline {
              //
              //Run Maven on a Unix agent.
 
+            //JENKINS_NODE_COOKIE=dontKillMe nohup java -jar ./target/ToLetProject-0.0.1-SNAPSHOT.jar &
+            //fuser -k 8585/tcp
              sh """
-            JENKINS_NODE_COOKIE=dontKillMe nohup java -jar ./target/ToLetProject-0.0.1-SNAPSHOT.jar &
-            fuser -k 8585/tcp
+
             JENKINS_NODE_COOKIE=dontKillMe nohup java -jar ./target/ToLetProject-0.0.1-SNAPSHOT.jar &
             """
 
