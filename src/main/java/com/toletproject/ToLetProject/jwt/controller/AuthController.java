@@ -91,7 +91,7 @@ public class AuthController {
 //        return forgetPasswordService.sendMail();
 //    }
 
-    @GetMapping("/lUser")
+    @GetMapping("/RUser")
     public String getSomething() {
         return "NULL";
     }
