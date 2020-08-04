@@ -1,6 +1,6 @@
 package com.toletproject.ToLetProject.jwt.controller;
 
-import com.toletproject.ToLetProject.dto.TempDTOList;
+
 import com.toletproject.ToLetProject.jwt.dto.AreaNameRequestsResponse;
 import com.toletproject.ToLetProject.jwt.dto.request.*;
 import com.toletproject.ToLetProject.jwt.services.ForgetPasswordService;
@@ -8,7 +8,6 @@ import com.toletproject.ToLetProject.jwt.services.SignUpAndSignInService;
 import com.toletproject.ToLetProject.model.DistrictsModel;
 import com.toletproject.ToLetProject.model.DivisionsModel;
 import com.toletproject.ToLetProject.model.UpzilaModels;
-import com.toletproject.ToLetProject.service.TempService;
 import com.toletproject.ToLetProject.service.UserService;
 import javassist.bytecode.DuplicateMemberException;
 import lombok.AllArgsConstructor;
@@ -93,7 +92,7 @@ public class AuthController {
         return "The Server is Running";
     }
 
-    TempService tempService;
+//    TempService tempService;
 
     @GetMapping("/test")
     public void test() {
@@ -115,10 +114,10 @@ public class AuthController {
         return userService.getUpzilaaById(id);
     }
 
-    @PostMapping("/tempSave")
-    public String tempSave(@RequestBody TempDTOList tempDTOList) {
-        return tempService.save(tempDTOList);
-    }
+//    @PostMapping("/tempSave")
+//    public String tempSave(@RequestBody TempDTOList tempDTOList) {
+//        return tempService.save(tempDTOList);
+//    }
 
 //    @GetMapping("/sendMail")
 //    public String sendMail()throws MessagingException, IOException {

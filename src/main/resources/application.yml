@@ -120,22 +120,22 @@ eureka:
 
 ### MySQL profile
 
-spring:
-  profiles: mysql
-  datasource:
-    url: ${DB_URL:jdbc:postgresql://localhost:5432/toletproject?createDatabaseIfNotExist=true}
-    username: ${DB_USERNAME:postgres}
-    password: ${DB_PASSWORD:1221}
+#spring:
+#  profiles: mysql
+#  datasource:
+#    url: ${DB_URL:jdbc:postgresql://localhost:5432/toletproject?createDatabaseIfNotExist=true}
+#    username: ${DB_USERNAME:postgres}
+#    password: ${DB_PASSWORD:1221}
 
 ---
 
 
-#spring:
-#  profiles: mysql
-#  datasource:
-#    url: ${DB_URL:jdbc:postgresql://127.0.0.1:5432/toletapp}
-#    username: ${DB_USERNAME:postgres}
-#    password: ${DB_PASSWORD:12211221}
+spring:
+  profiles: mysql
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://127.0.0.1:5432/toletapp}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:12211221}
 
 ---
 
