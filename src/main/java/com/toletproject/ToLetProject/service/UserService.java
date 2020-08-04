@@ -3,10 +3,8 @@ package com.toletproject.ToLetProject.service;
 import com.toletproject.ToLetProject.dto.response.AdListResponse;
 import com.toletproject.ToLetProject.dto.response.AdResponse;
 import com.toletproject.ToLetProject.dto.response.PhotoLinkDTO;
-import com.toletproject.ToLetProject.model.AdvertiseModel;
-import com.toletproject.ToLetProject.model.PhotoLink;
-import com.toletproject.ToLetProject.repository.AdRepository;
-import com.toletproject.ToLetProject.repository.UserAdListRepository;
+import com.toletproject.ToLetProject.model.*;
+import com.toletproject.ToLetProject.repository.*;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,12 +15,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
-
 @Service
 public class UserService {
 
     private final UserAdListRepository userAdListRepository;
     private final AdRepository adRepository;
+
 
     public AdListResponse getUserAdList(int pageNo, int pageSize) {
 
@@ -99,4 +97,39 @@ public class UserService {
 
 
     }
+
+    DistrictRepository districtRepository;
+    DivisionRepository divisionRepository;
+    UpzilaRepository upzilaRepository;
+
+    public void printAllDistrict() {
+        //List<DistrictsModel> districtList = districtRepository.findAll();
+        List<DistrictsModel> districtList = districtRepository.findAllByDivisionId(2);
+
+        for (DistrictsModel districtsModel : districtList) {
+            System.out.println(districtsModel.getName());
+        }
+
+    }
+
+    public List<DivisionsModel> getAllDivision() {
+        //return divisionRepository.findAll();
+        return divisionRepository.findAllSorted();
+
+    }
+
+    public List<DistrictsModel> getDistrictsById(Integer id) {
+        //List<DistrictsModel> districtList = districtRepository.findAll();
+        return districtRepository.findAllByDivisionId(id);
+    }
+
+    public List<UpzilaModels> getUpzilaaById(Integer id) {
+        //List<DistrictsModel> districtList = districtRepository.findAll();
+        UpzilaModels upzilaModels = new UpzilaModels();
+        List<UpzilaModels> upzilaModelsList = upzilaRepository.findAllByDistrictId(id);
+
+        return upzilaModelsList;
+    }
+
+
 }

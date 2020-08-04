@@ -1,7 +1,7 @@
 databaseChangeLog:
 
-  #  - include:
-  #      file: "classpath:/db.changelog/create-table/create-role-table.yml"
+  - include:
+      file: "classpath:/db.changelog/create-table/create-role-table.yml"
   #  - include:
   #      file: "classpath:/db.changelog/create-table/create-user-table.yml"
   #  - include:

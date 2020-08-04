@@ -8,8 +8,11 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 public class ToLetProjectApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ToLetProjectApplication.class, args);
-	}
+
+    public static void main(String[] args) {
+
+        SpringApplication.run(ToLetProjectApplication.class, args);
+
+    }
 
 }

@@ -29,6 +29,8 @@ public class UserController {
         }
 
     }
+
+
 //    @GetMapping("/ads")
 //    public AdListResponse getAdsByLocation(@RequestParam int pageNo, @RequestParam int pageSize){
 //
