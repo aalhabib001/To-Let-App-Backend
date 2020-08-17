@@ -39,7 +39,9 @@ public class OwnerService {
         System.out.println("2");
         advertiseModel.setOwnerPhone(signUpAndSignInService.getLoggedAuthUser().getPhoneNo());
         System.out.println("3");
-        advertiseModel.setAreaName(postAdvertiseRequest.getAreaName());
+        advertiseModel.setUpzilaAreaName(postAdvertiseRequest.getUpzilaOrAreaName());
+        advertiseModel.setDistrictName(postAdvertiseRequest.getDistrictName());
+        advertiseModel.setDivisionName(postAdvertiseRequest.getDivisionName());
         advertiseModel.setAdTitle(postAdvertiseRequest.getAdTitle());
         advertiseModel.setAreaOfProperty(postAdvertiseRequest.getAreaOfProperty());
         advertiseModel.setLocation(postAdvertiseRequest.getLocation());
@@ -53,14 +55,12 @@ public class OwnerService {
         advertiseModel.setBachelorAllowed(postAdvertiseRequest.getBachelorAllowed());
         advertiseModel.setRentCost(postAdvertiseRequest.getRentCost());
         advertiseModel.setLift(postAdvertiseRequest.getLift());
-        System.out.println("4");
         advertiseModel.setOwnerName(signUpAndSignInService.getLoggedAuthUser().getName());
 
         AdIdResponse adIdResponse = new AdIdResponse();
         adIdResponse.setAdId(id.toString());
         adRepository.save(advertiseModel);
 
-        System.out.println("5");
         return adIdResponse;
     }
 
@@ -95,10 +95,12 @@ public class OwnerService {
             AdResponse adResponse = AdResponse.builder()
                     .adId(advertiseModel.getAdId())
                     .ownerPhone(advertiseModel.getOwnerPhone())
-                    .areaName(advertiseModel.getAreaName())
                     .adTitle(advertiseModel.getAdTitle())
                     .areaOfProperty(advertiseModel.getAreaOfProperty())
                     .location(advertiseModel.getLocation())
+                    .upzilaOrAreaName(advertiseModel.getUpzilaAreaName())
+                    .districtName(advertiseModel.getDistrictName())
+                    .divisionName(advertiseModel.getDivisionName())
                     .propertyType(advertiseModel.getPropertyType())
                     .view(advertiseModel.getView())
                     .bed(advertiseModel.getBed())

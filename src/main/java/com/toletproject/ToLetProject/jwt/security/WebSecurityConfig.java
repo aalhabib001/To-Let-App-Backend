@@ -72,6 +72,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.cors().and().csrf().disable().
                 authorizeRequests()
+                .antMatchers("/api/user/**").permitAll()
                 .antMatchers("/").access("hasAuthority('SUPER_ADMIN')")
                 .antMatchers("/api/owner/deleteAll").access("hasAuthority('SUPER_ADMIN')")
                 .antMatchers("/api/auth/user/edit").access("hasAnyAuthority('USER','OWNER')")
@@ -79,7 +80,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/api/auth/areas").access("hasAuthority('SUPER_ADMIN')")
                 .antMatchers("/api/auth/**").permitAll()
                 .antMatchers("/public/**").permitAll()
-                .antMatchers("/user").permitAll()
                 .antMatchers("/v2/**").permitAll()
                 .antMatchers("/swagger-resources/**").permitAll()
                 .antMatchers("/webjars/springfox-swagger-ui/**").permitAll()

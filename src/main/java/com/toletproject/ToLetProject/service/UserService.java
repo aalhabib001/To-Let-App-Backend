@@ -58,7 +58,9 @@ public class UserService {
             AdResponse adResponse = AdResponse.builder()
                     .adId(advertiseModel.getAdId())
                     .ownerPhone(advertiseModel.getOwnerPhone())
-                    .areaName(advertiseModel.getAreaName())
+                    .upzilaOrAreaName(advertiseModel.getUpzilaAreaName())
+                    .districtName(advertiseModel.getDistrictName())
+                    .divisionName(advertiseModel.getDivisionName())
                     .adTitle(advertiseModel.getAdTitle())
                     .areaOfProperty(advertiseModel.getAreaOfProperty())
                     .location(advertiseModel.getLocation())
@@ -83,7 +85,7 @@ public class UserService {
 
     public AdListResponse getAdsByLocation(int pageNo, int pageSize, String location) {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
-        Page<AdvertiseModel> advertiseModels = userAdListRepository.findAllByAreaName(pageable, location);
+        Page<AdvertiseModel> advertiseModels = userAdListRepository.findAllByUpzilaAreaName(pageable, location);
 
         AdListResponse adListResponse = new AdListResponse();
 

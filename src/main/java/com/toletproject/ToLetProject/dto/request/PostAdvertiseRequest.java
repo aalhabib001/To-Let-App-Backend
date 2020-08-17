@@ -17,6 +17,12 @@ public class PostAdvertiseRequest {
 
     String location;
 
+    String upzilaOrAreaName;
+
+    String districtName;
+
+    String divisionName;
+
     String propertyType;
 
     String view;

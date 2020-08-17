@@ -17,13 +17,17 @@ public class AdResponse {
 
     String ownerPhone;
 
-    String areaName;
-
     String adTitle;
 
     double areaOfProperty;
 
     String location;
+
+    String upzilaOrAreaName;
+
+    String districtName;
+
+    String divisionName;
 
     String propertyType;
 

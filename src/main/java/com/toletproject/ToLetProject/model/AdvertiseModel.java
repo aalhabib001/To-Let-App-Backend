@@ -24,13 +24,17 @@ public class AdvertiseModel {
 
     String ownerPhone;
 
-    String areaName;
-
     String adTitle;
 
     double areaOfProperty;
 
     String location;
+
+    String upzilaAreaName;
+
+    String districtName;
+
+    String divisionName;
 
     String propertyType;
 

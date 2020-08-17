@@ -9,5 +9,6 @@ import java.util.List;
 @Repository
 public interface AdRepository extends JpaRepository<AdvertiseModel,String> {
     List<AdvertiseModel> findAllByOwnerPhone(String phoneNo);
-    List<AdvertiseModel> findAllByAreaName(String area);
+
+    List<AdvertiseModel> findAllByUpzilaAreaName(String area);
 }

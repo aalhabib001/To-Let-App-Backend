@@ -13,8 +13,8 @@ public interface UserAdListRepository extends PagingAndSortingRepository<Adverti
 
     Page<AdvertiseModel> findAll(Pageable pageable);
 
-    Page<AdvertiseModel> findAllByAreaName(Pageable pageable, String areaName);
+    Page<AdvertiseModel> findAllByUpzilaAreaName(Pageable pageable, String areaName);
 
-    Optional<AdvertiseModel> findAllByAreaName(String areaName);
+    Optional<AdvertiseModel> findAllByUpzilaAreaName(String areaName);
 
 }
