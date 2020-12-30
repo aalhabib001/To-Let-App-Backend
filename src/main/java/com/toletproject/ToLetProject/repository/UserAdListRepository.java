@@ -15,6 +15,18 @@ public interface UserAdListRepository extends PagingAndSortingRepository<Adverti
 
     Page<AdvertiseModel> findAllByUpzilaAreaName(Pageable pageable, String areaName);
 
+    Page<AdvertiseModel> findAllByBedAndUpzilaAreaName(Pageable pageable, int bed, String location);
+
+    Page<AdvertiseModel> findAllByBed(Pageable pageable, int bed);
+
+    Page<AdvertiseModel> findAllByBachelorAllowed(Pageable pageable, String bachelor);
+
+    Page<AdvertiseModel> findAllByBachelorAllowedAndBed(Pageable pageable, String bachelor, int bed);
+
+    Page<AdvertiseModel> findAllByBachelorAllowedAndUpzilaAreaName(Pageable pageable, String bachelor, String location);
+
+    Page<AdvertiseModel> findAllByBachelorAllowedAndUpzilaAreaNameAndBed(Pageable pageable, String bachelor, String location, int bed);
+
     Optional<AdvertiseModel> findAllByUpzilaAreaName(String areaName);
 
 }

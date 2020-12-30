@@ -13,27 +13,13 @@ public class UserController {
 
     private final UserService userService;
 
-//    @GetMapping("/ads")
-//    public AdListResponse getUserAdList(@RequestParam int pageNo, @RequestParam int pageSize) {
-//        //System.out.println("HI");
-//        return userService.getUserAdList(pageNo, pageSize);
-//    }
-
     @GetMapping("/ads")
-    public AdListResponse getAdsByLocation(@RequestParam int pageNo, @RequestParam int pageSize, @RequestParam(value = "area", required = false, defaultValue = "") String location) {
+    public AdListResponse getAds(@RequestParam int pageNo, @RequestParam int pageSize,
+                                 @RequestParam(value = "area", required = false) String location) {
 
-        if (!location.isEmpty()) {
-            return userService.getAdsByLocation(pageNo, pageSize, location);
-        } else {
-            return userService.getUserAdList(pageNo, pageSize);
-        }
-
+        return userService.getAds(pageNo, pageSize, location);
     }
 
 
-//    @GetMapping("/ads")
-//    public AdListResponse getAdsByLocation(@RequestParam int pageNo, @RequestParam int pageSize){
-//
-//    }
 
 }

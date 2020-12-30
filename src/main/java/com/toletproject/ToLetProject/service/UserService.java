@@ -41,11 +41,52 @@ public class UserService {
 
     }
 
+    public AdListResponse getAds(int pageNo, int pageSize, String location) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        Page<AdvertiseModel> advertiseModels;
+        if (location != null) {
+            advertiseModels = userAdListRepository.findAllByUpzilaAreaName(pageable, location);
+
+        } else {
+            advertiseModels = userAdListRepository.findAll(pageable);
+        }
+
+        AdListResponse adListResponse = new AdListResponse();
+
+        if (!advertiseModels.isEmpty()) {
+            adListResponse.setFound(true);
+        } else {
+            adListResponse.setFound(false);
+        }
+        adListResponse.setPageNo(pageNo);
+        adListResponse.setSize(pageSize);
+        adListResponse.setTotalSize(advertiseModels.getTotalElements());
+        adListResponse.setAdRespons(setResponseFromAll(advertiseModels));
+        return adListResponse;
+    }
+
+    public AdListResponse getAdsByLocation(int pageNo, int pageSize, String location) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        Page<AdvertiseModel> advertiseModels = userAdListRepository.findAllByUpzilaAreaName(pageable, location);
+
+        AdListResponse adListResponse = new AdListResponse();
+
+        if (!advertiseModels.isEmpty()) {
+            adListResponse.setFound(true);
+        } else {
+            adListResponse.setFound(false);
+        }
+        adListResponse.setAdRespons(setResponseFromAll(advertiseModels));
+        return adListResponse;
+
+
+    }
+
     List<AdResponse> setResponseFromAll(Page<AdvertiseModel> advertiseModelList) {
 
         List<AdResponse> adRespons = new ArrayList<>();
 
-        for(AdvertiseModel advertiseModel:advertiseModelList) {
+        for (AdvertiseModel advertiseModel : advertiseModelList) {
             List<PhotoLinkDTO> photoLinkDTOList = new ArrayList<>();
 
             for (PhotoLink photoLink : advertiseModel.getPhotoLinksCollection()) {
@@ -81,23 +122,6 @@ public class UserService {
             adRespons.add(adResponse);
         }
         return adRespons;
-    }
-
-    public AdListResponse getAdsByLocation(int pageNo, int pageSize, String location) {
-        Pageable pageable = PageRequest.of(pageNo, pageSize);
-        Page<AdvertiseModel> advertiseModels = userAdListRepository.findAllByUpzilaAreaName(pageable, location);
-
-        AdListResponse adListResponse = new AdListResponse();
-
-        if (!advertiseModels.isEmpty()) {
-            adListResponse.setFound(true);
-        } else {
-            adListResponse.setFound(false);
-        }
-        adListResponse.setAdRespons(setResponseFromAll(advertiseModels));
-        return adListResponse;
-
-
     }
 
     DistrictRepository districtRepository;

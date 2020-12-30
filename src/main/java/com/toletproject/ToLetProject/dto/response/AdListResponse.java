@@ -12,5 +12,8 @@ import java.util.List;
 @Builder
 public class AdListResponse {
     boolean found;
+    int pageNo;
+    int size;
+    long totalSize;
     List<AdResponse> adRespons;
 }

@@ -9,8 +9,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class PostAdvertiseRequest {
 
-    String areaName;
-
     String adTitle;
 
     double areaOfProperty;
